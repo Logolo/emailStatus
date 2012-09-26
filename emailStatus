@@ -1,0 +1,29 @@
+#!/bin/sh
+#A simple script to email the status of your server
+#This script is best used with cron to send
+#regular updates as to the status of your server
+#It includes information on uptime and the number
+#of users currently logged in. Replace USER and SERVER.
+#
+#Author: mshirlaw
+#Date: 26/9/12
+#
+###################################################
+date=`date`
+address="USER@SERVER.com"
+subject="Server Status for $date"
+uptime > uptest
+if [ -f uptest  ] 
+then
+    rm uptest
+    echo "Your server is working correctly!" >> message
+    echo "--------------------------------"
+    echo "Current uptime statistics are as follows:" >> message
+    echo `uptime` >> message
+    mail -s "$subject" "$address" < message
+    echo "The following email was sent to $address"
+    cat message
+    rm message
+else
+    echo "Error: Uptime command failed!"
+fi
