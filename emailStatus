@@ -12,18 +12,19 @@
 date=`date`
 address="USER@SERVER.com"
 subject="Server Status for $date"
-uptime > uptest
+sudo uptime > uptest
 if [ -f uptest  ] 
 then
     rm uptest
     echo "Your server is working correctly!" >> message
-    echo "--------------------------------"
     echo "Current uptime statistics are as follows:" >> message
     echo `uptime` >> message
+    echo "Current users logged in: " >> message
+    echo `who` >> message
     mail -s "$subject" "$address" < message
     echo "The following email was sent to $address"
-    cat message
     rm message
 else
     echo "Error: Uptime command failed!"
+    rm uptest
 fi
