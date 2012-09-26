@@ -22,7 +22,6 @@ then
     echo "Current users logged in: " >> message
     echo `who` >> message
     mail -s "$subject" "$address" < message
-    echo "The following email was sent to $address"
     rm message
 else
     echo "Error: Uptime command failed!"
