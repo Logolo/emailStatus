@@ -20,7 +20,7 @@ then
     echo `upsc ups1@localhost | head -6` >> message
     echo "" >> message
     echo "----------Updating DynDNS -------" >> message
-    echo `curl -sS ADDTRESS_HERE" >> message
+    echo `curl -sS ADDRESS_HERE` >> message
     echo "" >> message
     echo "-------Failed log in attempts-------" >> message
     echo `cat /var/log/faillog | tail -10` >> message
