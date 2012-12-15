@@ -1,7 +1,7 @@
 #!/bin/sh
 #A script to email the status of a server
 #This script also registers the server's IP address with a DynDNS service
-#such as freedns.afraid.org
+#such as freedns.afraid.org and monitors the status of an attached UPS
 
 date=`date`
 address="USER@DOMAIN"
@@ -19,7 +19,7 @@ then
     echo `who` >> message
     echo "" >> message
     echo "----------Status of UPS----------" >> message
-    echo `upsc ups1@localhost | head -6` >> message
+    echo `upsc ups_name@localhost | head -6` >> message
     echo "" >> message
     echo "----------Updating DynDNS -------" >> message
     echo `curl -sS ADDRESS_HERE` >> message
