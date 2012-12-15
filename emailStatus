@@ -1,5 +1,7 @@
 #!/bin/sh
 #A script to email the status of a server
+#This script also registers the server's IP address with a DynDNS service
+#such as freedns.afraid.org
 
 date=`date`
 address="USER@DOMAIN"
