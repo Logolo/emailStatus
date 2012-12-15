@@ -1,26 +1,29 @@
 #!/bin/sh
-#A simple script to email the status of your server
-#This script is best used with cron to send
-#regular updates as to the status of your server
-#It includes information on uptime and the number
-#of users currently logged in. Replace USER and SERVER.
-#
-#Author: mshirlaw
-#Date: 26/9/12
-#
-###################################################
+#A script to email the status of a server
+
 date=`date`
-address="USER@SERVER.com"
+address="USER@DOMAIN"
 subject="Server Status for $date"
 sudo uptime > uptest
 if [ -f uptest  ] 
 then
     rm uptest
     echo "Your server is working correctly!" >> message
-    echo "Current uptime statistics are as follows:" >> message
+    echo "" >> message
+    echo "----------Current uptime statistics----------" >> message
     echo `uptime` >> message
-    echo "Current users logged in: " >> message
+    echo "" >> message
+    echo "----------Current users logged in----------" >> message
     echo `who` >> message
+    echo "" >> message
+    echo "----------Status of UPS----------" >> message
+    echo `upsc ups1@localhost | head -6` >> message
+    echo "" >> message
+    echo "----------Updating DynDNS -------" >> message
+    echo `curl -sS ADDTRESS_HERE" >> message
+    echo "" >> message
+    echo "-------Failed log in attempts-------" >> message
+    echo `cat /var/log/faillog | tail -10` >> message
     mail -s "$subject" "$address" < message
     rm message
 else
